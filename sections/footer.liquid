@@ -1,0 +1,145 @@
+<div data-section-type="footer">
+  {% if linklists[section.settings.menu_linklist].links.size > 0 %}
+  <div class="nav-row" role="navigation" aria-label="{{ 'layout.footer.navigation_aria_label' | t | escape }}">
+    <div class="multi-level-nav">
+      <div class="tier-1">
+        <ul>
+          {% for link in linklists[section.settings.menu_linklist].links %}
+          <li {% if link.active %}class="active"{% endif %}>
+            <a href="{{ link.url }}" {% if link.links != blank %}class="has-children" aria-haspopup="true"{% endif %}>
+              {{ link.title }}
+              {% if link.links != blank %}
+              <span class="exp"><span>+</span>{% render 'icon-toggle-menu' %}</span>
+              {% endif %}
+            </a>
+
+            {% if link.links != blank %}
+            <ul>
+              {% for child_link in link.links %}
+              <li {% if child_link.active %}class="active"{% endif %}>
+                <a href="{{ child_link.url }}" class="{% if child_link.links != blank %}has-children {% if child_link.title contains 'LISTED' %}listing-title{% endif %}{% endif %}" {% if child_link.links != blank %}aria-haspopup="true"{% endif %}>
+                  {{ child_link.title | remove: ' LISTED' }}
+                  {% if child_link.links != blank %}
+                  <span class="exp"><span>+</span>{% render 'icon-toggle-menu' %}</span>
+                  {% endif %}
+                </a>
+
+                {% if child_link.links != blank %}
+                <ul{% if child_link.title contains 'LISTED' %} class="listed"{% endif %}>
+                  {% for child_child_link in child_link.links %}
+                  <li {% if child_child_link.active %}class="active"{% endif %}>
+                    <a href="{{ child_child_link.url }}">{{ child_child_link.title }}</a>
+                  </li>
+                  {% endfor %}
+                </ul>
+                {% endif %}
+              </li>
+              {% endfor %}
+            </ul>
+            {% endif %}
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div><!-- /.nav-row -->
+  {% endif %}
+
+  <div class="lower cf">
+    {% if section.settings.show_social_icons %}
+      {% capture icon_size %}{% if settings.soc_icons_double %}x46{% else %}x30{% endif %}{% endcapture %}
+      {% render 'social-icons', icon_setting: settings.social_custom_icon, icon_size: icon_size %}
+    {% endif %}
+
+    {% if section.settings.signup_show %}
+    <div class="interact">
+      <div class="signup-form-title">{{ section.settings.newsletter_title }}</div>
+      <div class="signup-form-subtitle user-content">{{ section.settings.newsletter_text }}</div>
+      {% render 'signup-form', custom_form_id: 'footer_signup' %}
+    </div><!-- /.interact -->
+    {% endif %}
+
+    {% if section.settings.show_locale_selector or section.settings.show_currency_selector %}
+      <div class="footer-localization">
+        {% render 'localization', input_prefix: 'footer' %}
+      </div>
+    {% endif %}
+
+    <div class="copyright">
+      <span class="copy">&copy; {{ "now" | date: "%Y" }} <a href="{{ routes.root_url }}">{{ shop.name }}</a>.</span>
+
+      {{ powered_by_link }}
+
+    </div><!-- /.copyright -->
+
+    <div class="payment-methods">
+      {% for type in shop.enabled_payment_types %}
+        {{ type | payment_type_svg_tag: class:'payment-icon' }}
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+
+{% schema %}
+  {
+    "name": "Footer",
+    "settings": [
+      {
+        "type": "link_list",
+        "id": "menu_linklist",
+        "label": "Menu",
+        "default": "footer"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_social_icons",
+        "label": "Show social icons",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "Language Selector",
+        "info": "To add a language, go to your [language settings.](/admin/settings/languages)"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_locale_selector",
+        "label": "Show language selector",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "Currency Selector",
+        "info": "To add a currency, go to your [payment settings.](/admin/settings/payments)"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_currency_selector",
+        "label": "Show currency selector",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "Newsletter"
+      },
+      {
+        "type": "checkbox",
+        "id": "signup_show",
+        "label": "Show newsletter signup",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "newsletter_title",
+        "label": "Heading",
+        "default": "Signup for our newsletter"
+      },
+      {
+        "type": "richtext",
+        "id": "newsletter_text",
+        "label": "Subheading"
+      }
+    ]
+  }
+{% endschema %}

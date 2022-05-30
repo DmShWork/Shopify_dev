@@ -1,0 +1,30 @@
+<span class="productlabel-container">
+  {%- assign inventory_limit_as_int = settings.prod_stock_warn_limit_int | plus: 0 -%}
+  {%- capture meta_label -%}
+    {%- for tag in product.tags -%}
+      {%- if tag contains 'meta-label-' -%}
+        <span class="productlabel general"><span>{{ tag | remove: 'meta-label-' }}</span></span>
+      {%- endif -%}
+    {%- endfor -%}
+  {%- endcapture -%}
+
+  {% for variant in product.variants %}
+    <script id="variant-label-{{ variant.id }}" type="text/template">
+      {%- capture label -%}
+        {%- if variant.available == false and settings.prod_sold_out_show -%}
+          <span class="productlabel soldout"><span>{{ 'products.labels.sold_out' | t }}</span></span>
+        {%- else -%}
+          {%- if settings.prod_sale_show and variant.compare_at_price > variant.price -%}
+            <span class="productlabel sale"><span>{{ 'products.labels.sale' | t }}</span></span>
+          {%- elsif settings.prod_stock_warn_show and variant.inventory_management == 'shopify' and variant.inventory_quantity > 0 and variant.inventory_quantity <= inventory_limit_as_int -%}
+            <span class="productlabel general"><span>{{ 'products.labels.only_x_left' | t: quantity: variant.inventory_quantity }}</span></span>
+          {%- elsif meta_label != blank -%}
+            {{ meta_label }}
+          {%- endif -%}
+        {%- endif -%}
+      {%- endcapture -%}
+      {{- label -}}
+    </script>
+    {% if variant.id == current_variant.id %}{{ label }}{% endif %}
+  {% endfor %}
+</span>
