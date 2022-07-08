@@ -53,7 +53,7 @@
                 {% if product.price_varies %}
                 <span class="from">{{ 'products.listing.from' | t }}</span>
                 {% endif %}
-                <span class="theme-money {% if product.compare_at_price > product.price %}on-sale{% endif %}">{{ product.price | money }}</span>
+                <span class="theme-money {% if product.compare_at_price > product.price %}on-sale{% endif %}">{{ product.price | money }}</span>,
                 <span class="theme-money {% if product.compare_at_price > product.price %}on-sale{% endif %}">{{ product.price | money }}</span>
               </span>
               {% if product.compare_at_price_max > product.price %}
@@ -85,8 +85,7 @@
   {%- if settings.prod_thumb_detail_show -%}
     {%- unless no_quick_buy_markup -%}
       <div class="quickbuy-container">
-        <a href="#" class="close-detail" aria-label="{{ 'products.quick_buy.close' | t }}" tabindex="-1">{% render 'svg-x' %}</a>
-        <div class="inner"></div>
+       
       </div>
     {%- endunless -%}
   {%- endif -%}
