@@ -145,7 +145,19 @@
   {% endif %}
 </div><!-- /.multi-tag-row -->
 
+{% if collection.products.size == 0 %}
+    <div class="container"><h5 class="align-centre fully-spaced-row">{{ 'collections.general.no_matches' | t }}</h5></div>
+{% else %}
+    {% unless settings.use_fullwidth_layout %}<div class="container">{% endunless %}
 
+    <div class="collection-listing{% if section.settings.coll_gridstream_mode == 'stream' %}-stream{% endif %} cf">
+      <div class="product-list product-list--per-row-{{ section.settings.products_per_row }} product-list--image-shape-{{ settings.prod_thumb_shape }}">
+        
+      </div>
+    </div>
+
+    {% unless settings.use_fullwidth_layout %}</div>{% endunless %}
+{% endif %}
 
 <div class="container pagination-row">{% render 'pagination-control', paginate: paginate %}</div>
 
