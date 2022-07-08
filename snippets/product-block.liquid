@@ -85,7 +85,8 @@
   {%- if settings.prod_thumb_detail_show -%}
     {%- unless no_quick_buy_markup -%}
       <div class="quickbuy-container">
-       
+        <a href="#" class="close-detail" aria-label="{{ 'products.quick_buy.close' | t }}" tabindex="-1">{% render 'svg-x' %}</a>
+        <div class="inner"></div>
       </div>
     {%- endunless -%}
   {%- endif -%}
