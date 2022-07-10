@@ -56,7 +56,7 @@
                 <span class="theme-money {% if product.compare_at_price > product.price %}on-sale{% endif %}">{{ product.price | money }}</span>,
               </span>
               <span class="price">
-                <span class="theme-money {% if product.compare_at_price > product.price %}on-sale{% endif %}">{{ product.price | money }}</span>
+                <span class="theme-money {% if product.compare_at_price > product.price %}on-sale{% endif %}">{{ product.price }}</span>
               </span>
               {% if product.compare_at_price_max > product.price %}
               <div class="reducedfrom"><span class="amount theme-money">{{ product.compare_at_price_max | money }}</span></div>
