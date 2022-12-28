@@ -74,38 +74,7 @@
     {%- endif -%}
 
 
-    <div class="filters">
-      {% if show_normal_filter %}
-      <a href="#" class="tags" data-toggle-target=".tags.nav-row.cat-normal">{{ 'collections.filtering.filter' | t }} <span class="state">+</span></a>
-      {% endif %}
-
-      {% if show_custom_filter_1 %}
-      <a href="#" class="tags" data-toggle-target=".tags.nav-row.cat-custom-1">{{ section.settings.tagfilt_custom1_name | escape }} <span class="state">+</span></a>
-      {% endif %}
-
-      {% if show_custom_filter_2 %}
-      <a href="#" class="tags" data-toggle-target=".tags.nav-row.cat-custom-2">{{ section.settings.tagfilt_custom2_name | escape }} <span class="state">+</span></a>
-      {% endif %}
-
-      {% if section.settings.coll_show_sort %}
-      <span class="sort tags">
-        <label for="sort-by">{{ 'collections.sorting.title' | t }}</label>
-        <span class="styled-select styled-select--inline">
-          {% assign current_sort = collection.sort_by | default: collection.default_sort_by %}
-          <select id="sort-by">
-            <option value="price-ascending" {% if current_sort == 'price-ascending' %}selected{% endif %}>{{ 'collections.sorting.price_ascending' | t }}</option>
-            <option value="price-descending" {% if current_sort == 'price-descending' %}selected{% endif %}>{{ 'collections.sorting.price_descending' | t }}</option>
-            <option value="title-ascending" {% if current_sort == 'title-ascending' %}selected{% endif %}>{{ 'collections.sorting.az' | t }}</option>
-            <option value="title-descending" {% if current_sort == 'title-descending' %}selected{% endif %}>{{ 'collections.sorting.za' | t }}</option>
-            <option value="created-ascending" {% if current_sort == 'created-ascending' %}selected{% endif %}>{{ 'collections.sorting.date_ascending' | t }}</option>
-            <option value="created-descending" {% if current_sort == 'created-descending' %}selected{% endif %}>{{ 'collections.sorting.date_descending' | t }}</option>
-            <option value="best-selling" {% if current_sort == 'best-selling' %}selected{% endif %}>{{ 'collections.sorting.best_selling' | t }}</option>
-            {% if section.settings.coll_show_feat or collection.default_sort_by == 'manual' %}<option value="manual" {% if current_sort == 'manual' %}selected{% endif %}>{{ 'collections.sorting.featured' | t }}</option>{% endif %}
-          </select>
-        </span>
-      </span>
-      {% endif %}
-    </div><!-- /.filters -->
+    
 
     <div class="social-area desktop-only">
       {% if section.settings.coll_gridstream_toggle %}
