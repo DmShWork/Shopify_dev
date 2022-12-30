@@ -242,43 +242,16 @@
 
   {% if section.settings.head_not_home_only == false or template == 'index' %}
 
-  <div id="store-messages" class="messages-{{ section.blocks.size }}">
+  <div id="store-messages" class="messages-{{ section.blocks.size }}" style="background: #ffffff;">
     <div class="container cf">
-      {% for block in section.blocks %}
-
-      <div class="message message-{{ forloop.index }}">
-        {% if block.settings.link_url != blank %}
-        <a href="{{ block.settings.link_url }}">
-          {% endif %}
-
-          {% if block.settings.heading != blank %}
-            <h6 class="title">{{ block.settings.heading | escape }}</h6>
-          {% endif %}
-          {% if block.settings.subheading != blank %}
-            <span class="tagline">{{ block.settings.subheading | escape }}</span>
-          {% endif %}
-
-          {% if block.settings.link_url != blank %}
-        </a>
-        {% endif %}
-
-        {% unless forloop.first %}<div class="fluff"></div>{% endunless %}
-      </div>
-
-      {% endfor %}
+      {% include 'breadcrumbs' %}
     </div>
   </div><!-- /#store-messages -->
 
   {% if section.settings.head_not_mob_show %}
   <div id="store-messages-mobile">
-    <div class="container">
-      {% if section.settings.head_not_mob_url != blank %}
-      <a href="{{ section.settings.head_not_mob_url }}">
-        {% endif %}
-        {{ section.settings.head_not_mob_text | escape }}
-        {% if section.settings.head_not_mob_url != blank %}
-      </a>
-      {% endif %}
+    <div class="container"> 
+      {% include 'breadcrumbs' %}
     </div>
   </div>
   {% endif %}
