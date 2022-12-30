@@ -1181,7 +1181,6 @@
         "blocks": {
           "a808b1e0-4abf-4901-85d9-7ba13e94c365": {
             "type": "message",
-            "disabled": true,
             "settings": {
               "heading": "",
               "subheading": "",
