@@ -245,28 +245,6 @@
   <div id="store-messages" class="messages-{{ section.blocks.size }}">
     <div class="container cf">
       {% include 'breadcrumbs' %}
-      {% for block in section.blocks %}
-
-      <div class="message message-{{ forloop.index }}">
-        {% if block.settings.link_url != blank %}
-        <a href="{{ block.settings.link_url }}">
-          {% endif %}
-
-          {% if block.settings.heading != blank %}
-            <h6 class="title">{{ block.settings.heading | escape }}</h6>
-          {% endif %}
-          {% if block.settings.subheading != blank %}
-            <span class="tagline">{{ block.settings.subheading | escape }}</span>
-          {% endif %}
-
-          {% if block.settings.link_url != blank %}
-        </a>
-        {% endif %}
-
-        {% unless forloop.first %}<div class="fluff"></div>{% endunless %}
-      </div>
-
-      {% endfor %}
     </div>
   </div><!-- /#store-messages -->
 
