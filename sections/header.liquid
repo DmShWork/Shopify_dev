@@ -251,13 +251,7 @@
   {% if section.settings.head_not_mob_show %}
   <div id="store-messages-mobile">
     <div class="container">
-      {% if section.settings.head_not_mob_url != blank %}
-      <a href="{{ section.settings.head_not_mob_url }}">
-        {% endif %}
-        {{ section.settings.head_not_mob_text | escape }}
-        {% if section.settings.head_not_mob_url != blank %}
-      </a>
-      {% endif %}
+      {% include 'breadcrumbs' %}
     </div>
   </div>
   {% endif %}
