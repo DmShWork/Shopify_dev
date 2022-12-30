@@ -33,7 +33,7 @@
   {% render 'social-meta-tags' %}
 
   {{ 'styles.css' | asset_url | stylesheet_tag }}
-{% include 'breadcrumbs' %}
+
   {{ 'https://code.jquery.com/jquery-3.3.1.min.js' | script_tag }}
   <script>
     window.theme = window.theme || {};
@@ -98,7 +98,9 @@
   <a class="skip-link visually-hidden" href="#content">{{ 'general.accessibility_labels.skip_to_content' | t }}</a>
 
   {% section 'header' %}
+  11
   {% include 'breadcrumbs' %}
+  22
   <main id="content" role="main">
     <div class="container cf">
 
